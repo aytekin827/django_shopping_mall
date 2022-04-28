@@ -1,0 +1,5 @@
+페스트캠퍼스 django 실전강의 중 참고 명령어 및 내용 정리
+
+Superuser
+username : mj
+password : 2121
