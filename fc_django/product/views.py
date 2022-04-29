@@ -1,5 +1,7 @@
+from itertools import product
+from re import template
 from django.shortcuts import render
-from django.views.generic import ListView,FormView
+from django.views.generic import ListView,FormView,DetailView
 from .models import Product
 from .forms import RegisterForm
 
@@ -16,3 +18,8 @@ class ProductCreate(FormView):
     template_name = 'register_product.html'
     form_class = RegisterForm
     success_url = '/product/'
+
+class Productdetail(DetailView):
+    template_name = 'product_detail.html'
+    queryset = Product.objects.all() # SQL filter를 줄 수도 있음. 
+    context_object_name = 'product'

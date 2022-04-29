@@ -44,3 +44,9 @@ password : 2121
     header에 설정하면 됨. 코드 참고
     
     base.html은 하나만 만들어도 templates 폴더의 템플릿파일들을 장고가 찾아줌.(settings.py > TEMPLATES > APP_DIRS:True)
+
+3-7 상품 상세보기 - product_detail
+    settings.py에서 <int:pk>를 사용하면 장고가 product_detail 뷰를 찾아 주어진 매개변수 pk를 찾아 뷰로 전달한다.
+    html템플릿에서는 html을 브라우저에 맞게 보여주려면 safe함수를 걸어주면 된다.
+    view에서는 DetailView를 상속받아 넘겨주는데 이때 queryset을 받게 된다. 이때 sql filter를 사용할 수도 있으니 참고!
+    
