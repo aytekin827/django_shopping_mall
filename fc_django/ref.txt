@@ -38,3 +38,9 @@ password : 2121
     4. urls.py에 연결
 
     항상 오타 있는지 확인!!!
+
+3-6 상품등록하기 - 위즈윗 에디터 summernote이용
+    bootstrap5 를 사용하니깐 안되서 bootstrap4를 사용해서 summernote구현했음.
+    header에 설정하면 됨. 코드 참고
+    
+    base.html은 하나만 만들어도 templates 폴더의 템플릿파일들을 장고가 찾아줌.(settings.py > TEMPLATES > APP_DIRS:True)
