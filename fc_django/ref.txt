@@ -21,7 +21,7 @@ password : 2121
 
 3-4 상품목록 만들기
     <th>테그의 scope속성 : 시각적 효과는 없지만 시각장애인들을 위한 스크린리더기 같은 장치를 사용할 때 사용되는 속성이다.
-    
+
     listview는 model만 넘겨주면 리스트로 뷰를 만들어준다.
     listview에서 object_lsit라는 변수명으로 template에서 리스트값들을 불러올 수 있음. 다른 변수명을 사용하고 싶을 땐 context_object_name을 사용해서 원하는 변수명 설정 가능.
 
@@ -31,3 +31,10 @@ password : 2121
     등록날짜 형식 변경 : 장고의 humanize 앱 사용.(https://docs.djangoproject.com/en/4.0/ref/templates/builtins/#date)
     위의 공식문서 참고해서 장고 builtin filter사용.
 
+3-5 상품 등록하기 - formview를 이용해서 상품 등록
+    1. register_product.html만들어두기.
+    2. 상품등록을 위한 폼(Form)만들기.
+    3. views.py에 상품등록 함수 만들기.
+    4. urls.py에 연결
+
+    항상 오타 있는지 확인!!!
