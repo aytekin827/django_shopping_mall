@@ -49,4 +49,11 @@ password : 2121
     settings.py에서 <int:pk>를 사용하면 장고가 product_detail 뷰를 찾아 주어진 매개변수 pk를 찾아 뷰로 전달한다.
     html템플릿에서는 html을 브라우저에 맞게 보여주려면 safe함수를 걸어주면 된다.
     view에서는 DetailView를 상속받아 넘겨주는데 이때 queryset을 받게 된다. 이때 sql filter를 사용할 수도 있으니 참고!
+
+3-8 상품 주문하기 - 1
+    html코드 짤 때 띄어쓰기 중요하다. 
+    
+    DetailView에서 Form의 내용을 사용할 땐 get_context_data함수를 이용해서 폼의 내용을 가져올 수 있다.
+
+    
     

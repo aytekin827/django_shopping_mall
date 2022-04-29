@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.views.generic import ListView,FormView,DetailView
 from .models import Product
 from .forms import RegisterForm
+from order.forms import RegisterForm as OrderForm
 
 # Create your views here.
 
@@ -23,3 +24,9 @@ class Productdetail(DetailView):
     template_name = 'product_detail.html'
     queryset = Product.objects.all() # SQL filter를 줄 수도 있음. 
     context_object_name = 'product'
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = OrderForm(self.request) # form이라는 변수에 OrderForm의 내용이 반영됨.
+        return context

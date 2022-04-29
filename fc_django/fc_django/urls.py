@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from fcuser.views import index,RegisterView,LoginView
 from product.views import ProductList, ProductCreate, Productdetail
+from order.views import OrderCreate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +26,7 @@ urlpatterns = [
     path('login/', LoginView.as_view()),
     path('product/',ProductList.as_view()),
     path('product/create/', ProductCreate.as_view()),
-    path('product/<int:pk>/',Productdetail.as_view())
+    path('order/create/', OrderCreate.as_view()),
+    path('product/<int:pk>/',Productdetail.as_view()),
 
 ]
