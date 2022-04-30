@@ -1,4 +1,3 @@
-import imp
 from django.shortcuts import render, redirect
 from django.views.generic.edit import FormView
 from .forms import RegisterForm
@@ -12,6 +11,7 @@ class OrderCreate(FormView):
     def form_invalid(self, form):
         return redirect('/product/' + str(form.product))
 
+    # session정보 가져오기.
     def get_form_kwargs(self, **kwargs):
         kw = super().get_form_kwargs(**kwargs)
         kw.update({
