@@ -3,7 +3,11 @@ from django.views.generic import FormView, ListView
 from django.views.generic.edit import FormView
 from .forms import RegisterForm
 from .models import Order
+from django.utils.decorators import method_decorator
+from fcuser.decorators import login_required,admin_required
+
 # Create your views here.
+@method_decorator(admin_required, name='dispatch')
 class OrderCreate(FormView):
     form_class = RegisterForm
     success_url = '/product/'
@@ -20,6 +24,8 @@ class OrderCreate(FormView):
         })
         return kw
 
+
+@method_decorator(login_required, name='dispatch')
 class OrderList(ListView):
     template_name = 'order.html'
     context_object_name = 'order_list' 
@@ -29,3 +35,5 @@ class OrderList(ListView):
     def get_queryset(self,**kwargs):
         queryset = Order.objects.filter(fcuser__email=self.request.session.get('user'))
         return queryset
+
+    
