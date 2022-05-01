@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.hashers import check_password, make_password
+from django.contrib.auth.hashers import check_password
 from .models import Fcuser
 
 class RegisterForm(forms.Form):
@@ -27,9 +27,9 @@ class RegisterForm(forms.Form):
         label='비밀번호 확인'
     )
 
+    # clean은 유효성 검사를 위한 부분
     def clean(self):
         cleaned_data = super().clean()
-        email = cleaned_data.get('email')
         password = cleaned_data.get('password')
         re_password = cleaned_data.get('re_password')
 
@@ -38,12 +38,6 @@ class RegisterForm(forms.Form):
                 self.add_error('password','비밀번호가 서로 다릅니다.')
                 self.add_error('re_password','비밀번호가 서로 다릅니다.')
 
-            else:
-                fcuser = Fcuser(
-                    email = email,
-                    password = make_password(password)
-                )
-                fcuser.save()
 
 class LoginForm(forms.Form):
     email = forms.EmailField(

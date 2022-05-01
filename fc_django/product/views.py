@@ -4,7 +4,6 @@ from .forms import RegisterForm
 from order.forms import RegisterForm as OrderForm
 from fcuser.decorators import admin_required
 from django.utils.decorators import method_decorator
-# Create your views here.
 
 # listview는 model만 넘겨주면 리스트로 뷰를 만들어준다.
 class ProductList(ListView):
@@ -18,6 +17,16 @@ class ProductCreate(FormView):
     template_name = 'register_product.html'
     form_class = RegisterForm
     success_url = '/product/'
+
+    def form_valid(self,form):
+        product = Product(
+            name = form.data.get('name'),
+            price = form.data.get('price'),
+            description = form.data.get('description'),
+            stock = form.data.get('stock')
+        )
+        product.save()
+        return super().form_valid(form)
 
 class Productdetail(DetailView):
     template_name = 'product_detail.html'

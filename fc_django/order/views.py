@@ -1,3 +1,4 @@
+from asyncore import dispatcher
 from django.shortcuts import render, redirect
 from django.views.generic import FormView, ListView
 from django.views.generic.edit import FormView
@@ -5,6 +6,9 @@ from .forms import RegisterForm
 from .models import Order
 from django.utils.decorators import method_decorator
 from fcuser.decorators import login_required,admin_required
+from django.db import transaction
+from product.models import Product
+from fcuser.models import Fcuser
 
 # Create your views here.
 @method_decorator(admin_required, name='dispatch')
@@ -12,9 +16,23 @@ class OrderCreate(FormView):
     form_class = RegisterForm
     success_url = '/product/'
 
+    def form_valid(self,form):
+        with transaction.atomic():
+            prod = Product.objects.get(pk=form.data.get('product'))
+            order = Order(
+                quantity = form.data.get('quantity'),
+                product = Product.objects.get(pk=form.data.get('product')),
+                fcuser = Fcuser.objects.get(email=self.request.session.get('user'))
+            )
+            order.save()
+            prod.stock -= int(form.data.get('quantity'))
+            prod.save()
+
+        return super().form_valid(form)
+
     # form의 유효성 검사 통과 못했을 때 redirection해줄 주소 설정하는 부분.
     def form_invalid(self, form):
-        return redirect('/product/' + str(form.product))
+        return redirect('/product/' + str(form.data.get('product')))
 
     # session정보 가져오기.
     def get_form_kwargs(self, **kwargs):
@@ -35,5 +53,3 @@ class OrderList(ListView):
     def get_queryset(self,**kwargs):
         queryset = Order.objects.filter(fcuser__email=self.request.session.get('user'))
         return queryset
-
-    
