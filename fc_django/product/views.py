@@ -1,9 +1,24 @@
 from django.views.generic import ListView,FormView,DetailView
+from django.utils.decorators import method_decorator
+from rest_framework import generics
+from rest_framework import mixins
+
+from fcuser.decorators import admin_required
 from .models import Product
 from .forms import RegisterForm
+from .serializers import ProductSerializer
 from order.forms import RegisterForm as OrderForm
-from fcuser.decorators import admin_required
-from django.utils.decorators import method_decorator
+
+class ProductListAPI(generics.GenericAPIView, mixins.ListModelMixin):
+    serializer_class = ProductSerializer
+    
+    def get_queryset(self):
+        return Product.objects.all().order_by('id')
+
+    # listmodelmixin을 사용하기 때문에 아래처럼 사용해도 된다.?
+    def get(self,request,*args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
 
 # listview는 model만 넘겨주면 리스트로 뷰를 만들어준다.
 class ProductList(ListView):
