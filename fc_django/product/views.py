@@ -19,6 +19,16 @@ class ProductListAPI(generics.GenericAPIView, mixins.ListModelMixin):
     def get(self,request,*args, **kwargs):
         return self.list(request, *args, **kwargs)
 
+class ProductDetailAPI(generics.GenericAPIView, mixins.RetrieveModelMixin):
+    serializer_class = ProductSerializer
+    
+    def get_queryset(self):
+        return Product.objects.all().order_by('id')
+
+    # listmodelmixin을 사용하기 때문에 아래처럼 사용해도 된다.?
+    def get(self,request,*args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
 
 # listview는 model만 넘겨주면 리스트로 뷰를 만들어준다.
 class ProductList(ListView):
