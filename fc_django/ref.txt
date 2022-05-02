@@ -105,3 +105,20 @@ password : 2121
     jquery를 사용해서 ajax사용 및 api연결
 
     ajax문법이나 html javascript이런 부분 내가 정말 모르는구만, 계속 부딫히자!!!!!
+
+8-1 GCP로 배포하기
+    google cloud platform으로 35.189.145.240:8000에 서버를 띄워놓은 상태
+
+    uwsgi 설치
+    c-compiler 는 gcc설치
+
+    wsgi.py파일을 이용해서 배포한다.
+    linux 명령어 : uwsgi --http :8000 --home ~/fc_env --chdir ~/ fc_django --module fc_django.wsgi
+    uwsgi : 이 명령어로 실행시킴
+    --http : 열어줄 포트, 호스트 
+    --home : 가상환경 경로
+    --chdir : home경로
+    --module : 프로젝트.wsgi
+
+    백그라운드로 앱 실행시키기. - 데몬
+    nohup [위 명령어] &
