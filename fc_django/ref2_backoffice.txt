@@ -1,0 +1,3 @@
+3. django admin 사용자 생성 및 권한.
+	django admin페이지에서 backoffice용 아이디를 생성하고 권한 설정이 가능하다.
+    단, 주의할 점은 superuser는 backoffice용 아이디도 관리할 수 있는 가장 강력한 권한을 가진 계정이므로 하나만 생성
