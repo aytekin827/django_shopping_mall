@@ -14,8 +14,6 @@ class OrderAdmin(admin.ModelAdmin):
             return format_html(f'<span style="color:green"><strong>{obj.status}</strong></span>')
         else:
             return obj.status
-    print(styled_status.__dict__)
-    print(dir(styled_status))
 
     styled_status.short_description = '상태'
 

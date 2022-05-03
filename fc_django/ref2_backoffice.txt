@@ -2,17 +2,22 @@
 	django admin페이지에서 backoffice용 아이디를 생성하고 권한 설정이 가능하다.
     단, 주의할 점은 superuser는 backoffice용 아이디도 관리할 수 있는 가장 강력한 권한을 가진 계정이므로 하나만 생성
 
-list_display에 필터 걸기.
+4,5 list_display에 필터 걸기.
 	admin.py에서 list_filter해주고 튜플에 컬럼 명 넣기.
 
-choices는 콤보박스 만들어줄 때 사용하면 됨.
+	choices는 콤보박스 만들어줄 때 사용하면 됨.
 
-admin페이지에서 html적용하기
-from django.utils.html import format_html # html escape를 없애준다.
-format_html을 사용하여 html escape를 제거해주며
-list_display = ('test',)
-def test(self,obj):
-	return format_html(...)
-	이런식으로 html과 css도 넣어가며 커스터마이징을 해줄 수 있다.
+	admin페이지에서 html적용하기
+	from django.utils.html import format_html # html escape를 없애준다.
+	format_html을 사용하여 html escape를 제거해주며
+	list_display = ('test',)
+	def test(self,obj):
+		return format_html(...)
+		이런식으로 html과 css도 넣어가며 커스터마이징을 해줄 수 있다.
 
-이 때 test.short_description 속성을 설정해서 컬럼 제목을 설정해줄 수 있다. 
+	이 때 test.short_description 속성을 설정해서 컬럼 제목을 설정해줄 수 있다. 
+
+6. 커스텀필드 포멧팅 - view에서 humanize 사용하기.
+	from django.contrib.humanize.templatetags.humanize import intcomma 이렇게 import 해주고. import 경로 확인.
+	함수로써 사용해주면 된다.
+	import 경로가 어떻게 다큐멘테이션에서 찾을 수 있는지가 ...
