@@ -29,8 +29,18 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+BATON = {
+    'SITE_HEADER':'패스트캠퍼스 backoffice', # 좌측 상단 제목
+    'SITE_TITLE':'패스트캠퍼스 백오피스', # 우측 하단
+    'INDEX_TITLE':'패스트캠퍼스 관리자페이지', # 중앙 상단 제목
+    # 'SUPPORT_HREF':'mailto:mjeong827@gmail.com',
+    'SUPPORT_HREF':'https://naver.com', # 좌측 하단 support
+    'COPYRIGHT':'aytekin', # 중앙 하단
+    'POWERED_BY':'<a herf=.>test</a>', # 우측 하단 developed by : ~
+}
 
 INSTALLED_APPS = [
+    'baton',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +51,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'fcuser',
     'order',
-    'product'
+    'product',
+
+    'baton.autodiscover'
 ]
 
 MIDDLEWARE = [

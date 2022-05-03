@@ -21,3 +21,9 @@
 	from django.contrib.humanize.templatetags.humanize import intcomma 이렇게 import 해주고. import 경로 확인.
 	함수로써 사용해주면 된다.
 	import 경로가 어떻게 다큐멘테이션에서 찾을 수 있는지가 ...
+	https://stackoverflow.com/questions/37970001/how-to-use-django-contrib-humanize-in-a-model
+
+7. 오픈소스를 활용한 어드민 스타일링
+	baton이라는 오픈소스를 활용해서 테마 적용
+	설치 : pip install django-baton
+	https://github.com/otto-torino/django-baton 참고
