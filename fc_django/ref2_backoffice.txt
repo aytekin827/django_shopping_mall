@@ -37,3 +37,9 @@
 9. django 목록페이지 제목 커스터마이징.
 	각 앱의 admin.py페이지 안에 changelist_view함수를 상속, 오버라이딩 해서 사용
 	extra_context에 딕셔너리 형태로 { 'title' : '원하는 목록 명'} 이런식으로 지정해줘서 커스터마이징
+
+10. django 수정페이지 제목 커스터마이징과 인터페이스 언어 변경
+	각 앱의 admin.py페이지 안에 changeform_view함수를 상속, 오버라이딩 해서 사용
+	object_id 를 가져와서 그 해당 아이디의 정보들을 extra_context에 넘겨줘서 커스터마이징 할 수 있다.
+
+	언어를 바꾸고싶을 땐 settings.py에서 LANGUAGE_CODE를 변경해주면 된다. ko-kr로 
