@@ -27,3 +27,9 @@
 	baton이라는 오픈소스를 활용해서 테마 적용
 	설치 : pip install django-baton
 	https://github.com/otto-torino/django-baton 참고
+
+8. django app 이름 커스터마이징.
+	프로젝트 settings.py에서 installed_apps 리스트에 앱.apps.[config클래스] 이런식으로 설정.
+	각 앱의 apps.py에서 config 클래스에 verbose_name을 설정해서 UI에 나타날 앱을 커스터마이징 할 수 있다.
+
+	참고. 각 앱에 들어있는 모델의 이름을 커스터마이징 할 땐 models.py에서 모델 클래스 안에 Meta클래스에서 verbose_name을 설정해줘서 커스터마이징 한다.

@@ -49,9 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'rest_framework',
-    'fcuser',
-    'order',
-    'product',
+    'fcuser.apps.FcuserConfig',
+    'order.apps.OrderConfig',
+    'product.apps.ProductConfig',
 
     'baton.autodiscover'
 ]
