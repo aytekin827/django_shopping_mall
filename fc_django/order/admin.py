@@ -17,4 +17,9 @@ class OrderAdmin(admin.ModelAdmin):
 
     styled_status.short_description = '상태'
 
+    def changelist_view(self, request, extra_context=None):
+        extra_context = { 'title' : '주문 목록'}
+        print(request)
+        return super().changelist_view(request, extra_context)
+
 admin.site.register(Order, OrderAdmin)

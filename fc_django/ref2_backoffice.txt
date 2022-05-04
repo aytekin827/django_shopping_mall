@@ -33,3 +33,7 @@
 	각 앱의 apps.py에서 config 클래스에 verbose_name을 설정해서 UI에 나타날 앱을 커스터마이징 할 수 있다.
 
 	참고. 각 앱에 들어있는 모델의 이름을 커스터마이징 할 땐 models.py에서 모델 클래스 안에 Meta클래스에서 verbose_name을 설정해줘서 커스터마이징 한다.
+
+9. django 목록페이지 제목 커스터마이징.
+	각 앱의 admin.py페이지 안에 changelist_view함수를 상속, 오버라이딩 해서 사용
+	extra_context에 딕셔너리 형태로 { 'title' : '원하는 목록 명'} 이런식으로 지정해줘서 커스터마이징

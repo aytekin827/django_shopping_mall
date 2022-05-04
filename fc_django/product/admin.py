@@ -23,5 +23,11 @@ class ProductAdmin(admin.ModelAdmin):
 
     styled_stock.short_description = '재고상태'
     price_format.short_description = '가격'
+
+    def changelist_view(self, request, extra_context=None):
+        extra_context = { 'title' : '상품 목록'}
+        print(request)
+        return super().changelist_view(request, extra_context)
+
 admin.site.register(Product, ProductAdmin)
 
