@@ -1,11 +1,26 @@
+from django.db.models import F
 from django.contrib import admin
 from django.utils.html import format_html # html escape를 없애준다.
 from .models import Order
 # Register your models here.
 
+def refund(moodeladmin, request, queryset):
+    # queryset의 변수에 어드민페이지에서 선택한 모델들이 들어온다.
+    queryset.update(status='환불')
+    for obj in queryset:
+        obj.product.stock += obj.quantity
+        obj.product.save()
+
+refund.short_description = '환불1'
+
+
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('fcuser', 'product', 'styled_status')
     list_filter = ('status',) # 필터 넣어주는 방법
+
+    actions = [
+        refund
+    ]
 
     def styled_status(self, obj):
         if obj.status == '환불':
