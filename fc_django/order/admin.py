@@ -1,15 +1,30 @@
-from django.db.models import F
+from django.contrib.admin.models import LogEntry, CHANGE
+from django.contrib.contenttypes.models import ContentType
+from django.db.models import F, Q
 from django.contrib import admin
 from django.utils.html import format_html # html escape를 없애준다.
+from django.db import transaction
 from .models import Order
 # Register your models here.
 
 def refund(moodeladmin, request, queryset):
     # queryset의 변수에 어드민페이지에서 선택한 모델들이 들어온다.
-    queryset.update(status='환불')
-    for obj in queryset:
-        obj.product.stock += obj.quantity
-        obj.product.save()
+    with transaction.atomic():
+        qs = queryset.filter(~Q(status='환불'))
+        ct = ContentType.objects.get_for_model(queryset.model)
+        for obj in qs:
+            obj.product.stock += obj.quantity
+            obj.product.save()
+
+            LogEntry.objects.log_action(
+                user_id = request.user.id,
+                content_type_id = ct.pk,
+                object_id = obj.pk,
+                object_repr = '주문 환불',
+                action_flag = CHANGE,
+                change_message='주문 환불'
+            )
+        qs.update(status='환불')
 
 refund.short_description = '환불1'
 
