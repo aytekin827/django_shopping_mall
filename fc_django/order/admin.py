@@ -30,12 +30,17 @@ refund.short_description = '환불1'
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('fcuser', 'product', 'styled_status')
+    list_display = ('fcuser', 'product', 'styled_status','action')
     list_filter = ('status',) # 필터 넣어주는 방법
+    change_list_template = 'admin/order_change_list.html'
 
     actions = [
         refund
     ]
+
+    def action(self,obj):
+        if obj.status != '환불':
+            return format_html(f'<input type="button" value="환불" onclick="order_refund_submit({obj.id})" class="btn btn-primary btn-sm">')
 
     def styled_status(self, obj):
         if obj.status == '환불':
@@ -49,7 +54,27 @@ class OrderAdmin(admin.ModelAdmin):
 
     def changelist_view(self, request, extra_context=None):
         extra_context = { 'title' : '주문 목록'}
-        print(request)
+
+        if request.method == 'POST':
+            # print(request.POST)
+            obj_id = request.POST.get('obj_id')
+            if obj_id:
+                qs = Order.objects.filter(pk=obj_id)
+                ct = ContentType.objects.get_for_model(qs.model)
+                for obj in qs:
+                    obj.product.stock += obj.quantity
+                    obj.product.save()
+
+            LogEntry.objects.log_action(
+                user_id = request.user.id,
+                content_type_id = ct.pk,
+                object_id = obj.pk,
+                object_repr = '주문 환불',
+                action_flag = CHANGE,
+                change_message='주문 환불'
+                )
+            qs.update(status='환불')
+
         return super().changelist_view(request, extra_context)
 
     def changeform_view(self, request, object_id=None, form_url='', extra_context=None):
