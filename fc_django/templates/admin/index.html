@@ -19,6 +19,9 @@
 <div id="content-main" class="p-4">
   <h4>주문 현황</h4>
   <canvas id="orderChart"></canvas>
+  <h4>달러 환율 : {{ exchange }} </h4>
+
+  
 </div>
 {% for key,value in orders.items %}
 {{key}},{{value}}

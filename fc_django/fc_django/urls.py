@@ -17,10 +17,12 @@ import datetime
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic import TemplateView
+from fc_django.functions import get_exchange
 from fcuser.views import index,RegisterView,LoginView, logout
 from product.views import ProductList, ProductCreate, Productdetail, ProductListAPI,ProductDetailAPI
 from order.views import OrderCreate, OrderList
 from order.models import Order
+from .functions import get_exchange
 
 orig_index = admin.site.index
 
@@ -35,7 +37,8 @@ def fastcampus_index(request, extra_context=None):
         order_cnt = Order.objects.filter(register_date__date=target_date).count()
         order_data[date_key] = order_cnt
     extra_context = {
-        'orders': order_data
+        'orders': order_data,
+        'exchange':get_exchange
     }
     return orig_index(request,extra_context)
 
