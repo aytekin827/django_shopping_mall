@@ -33,6 +33,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ('fcuser', 'product', 'styled_status','action')
     list_filter = ('status',) # 필터 넣어주는 방법
     change_list_template = 'admin/order_change_list.html'
+    change_form_template = 'admin/order_change_form.html'
 
     actions = [
         refund
@@ -80,6 +81,8 @@ class OrderAdmin(admin.ModelAdmin):
     def changeform_view(self, request, object_id=None, form_url='', extra_context=None):
         order = Order.objects.get(pk=object_id)
         extra_context = { 'title' : f"'{order.fcuser.email}'의 '{order.product.name}' 수정하기"}
+        extra_context['show_save_and_add_another'] = False
+        extra_context['show_save_and_continue'] = False
         return super().changeform_view(request, object_id, form_url, extra_context)
 
 admin.site.register(Order, OrderAdmin)
