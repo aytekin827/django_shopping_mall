@@ -55,7 +55,7 @@ BATON = {
         { 
             'type': 'free', 'label': '주문', 'default_open': True, 'children':[
             {'type' : 'model', 'label':'주문','name':'order','app':'order'},
-            {'type' :'free','label':'주문 날짜 뷰','url':'/admin/order/order/date_view/'}
+            {'type' : 'free', 'label':'주문 날짜 뷰', 'url':'/admin/order/order/date_view/'}
             ]
         },
         {

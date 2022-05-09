@@ -13,12 +13,33 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import datetime
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic import TemplateView
 from fcuser.views import index,RegisterView,LoginView, logout
 from product.views import ProductList, ProductCreate, Productdetail, ProductListAPI,ProductDetailAPI
 from order.views import OrderCreate, OrderList
+from order.models import Order
+
+orig_index = admin.site.index
+
+def fastcampus_index(request, extra_context=None):
+
+    base_date = datetime.datetime.now() - datetime.timedelta(days=7)
+    order_data = {}
+    for i in range(7):
+        target_dttm = base_date + datetime.timedelta(days=i)
+        date_key = target_dttm.strftime('%Y-%m-%d')
+        target_date = datetime.date(target_dttm.year, target_dttm.month, target_dttm.day)
+        order_cnt = Order.objects.filter(register_date__date=target_date).count()
+        order_data[date_key] = order_cnt
+    extra_context = {
+        'orders': order_data
+    }
+    return orig_index(request,extra_context)
+
+admin.site.index = fastcampus_index
 
 urlpatterns = [
     re_path(r'^admin/manual/$', 
