@@ -82,6 +82,13 @@
 	이때 TemplateView.as_view를 이용해서 간단하게 추가 가능.
 	settings.py에 TEMPLATES -> DIR에 경로 추가하기.
 	템플릿.html 만들기.
+
+19. 메뉴 커스터마이징 하기.
+	1. baton 패키지 안에서 커스터마이징 하기.
+	https://github.com/otto-torino/django-baton#configuration-menu 참고
+	2. (기존 탬플릿) django내에서 커스터마이징 하기
+	site_pakages에서 app_list.html을 프로젝트 디렉토리로 복사해와서 커스터마이징 하기.
+
 	
 
 
