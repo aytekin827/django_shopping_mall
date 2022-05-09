@@ -1,0 +1,15 @@
+{% extends 'admin/base_site.html' %}
+{% load i18n admin_urls static admin_list %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    &rsaquo; <a href="{% url 'admin:app_list' app_label='order' %}">주문</a>
+    &rsaquo; 주문
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content_main">
+    hello django
+</div>
+{% endblock %}
