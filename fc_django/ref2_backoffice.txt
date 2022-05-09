@@ -76,4 +76,12 @@
 
 		get_urls함수를 오버라이딩 해서 urls연결해주기. 연결 방법 및 패턴은 코드 참고.
 
+18. 관리자 커스텀페이지 만들기.
+	앱에 속해있는 새로운 페이지가 아니라 아예 새로운 커스텀페이지 만들기.
+	urls.py에서 'admin/'위에 추가하고자 하는 path를 추가한다.
+	이때 TemplateView.as_view를 이용해서 간단하게 추가 가능.
+	settings.py에 TEMPLATES -> DIR에 경로 추가하기.
+	템플릿.html 만들기.
+	
+
 
